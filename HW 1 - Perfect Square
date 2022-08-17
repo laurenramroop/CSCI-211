@@ -1,5 +1,5 @@
-//Designed to use basic operations to determine the 
-//last two digits that are odd in a perfect square
+//Designed to use basic operations to determine a perfect square where
+//the last two digits are odd
 
 #include <iostream>
 #include <cmath>
