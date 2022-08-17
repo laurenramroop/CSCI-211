@@ -1,4 +1,5 @@
-//Mini exercised designed to familiarize pointers and location of pointer addresses
+//Mini exercised designed to familiarize pointers, size of pointers
+//and location of pointer addresses
 
 #include <iostream>
 using namespace std;
