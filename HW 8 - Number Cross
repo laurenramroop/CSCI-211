@@ -1,0 +1,81 @@
+// This program is designed to print numbers 1 through 10 in a cross
+// without any numbers being next to or diagonal from consecutive numbers
+// i.e. 4 can't be next to or diagonal from 5. It implements a backtracking function
+// similar to 8 queens problem 
+
+#include <iostream>
+#include <cstdlib>
+#include <cmath>
+using namespace std;
+
+int q[8], c = 0;
+int s[8] = {1, 2, 3, 4, 5, 6, 7, 8};
+int a[8][5] = {{-1}, {0,-1}, {0, -1}, {0, 1, 2, -1}, {0, 1, 3, -1}, {1, 4, -1}, {2, 3, 4, -1}, {3, 4, 5, 6, -1}};
+
+//ok function
+bool ok(int a[][5], int c){
+  //check box conflict
+  for (int i = 0; a[c][i] != -1; i++){
+    if (abs(q[c] - q[a[c][i]]) == 1) return false;
+  }
+
+  //check to see if numbers are repeated
+  for (int j = 0; j < c; j++){ 
+    if (q[c] == q[j])  return false;
+  }
+
+  return true;
+}
+
+//backtrack function
+void backtrack(int &c){
+  c--; 
+  if (c == -1) c++;
+  return;
+}
+
+//print like a cross
+void print(){
+  cout<<"  ";
+  for (int i = 0; i < 2; i++) cout<<q[i]<<" ";
+  cout<<" "<<endl;
+  for (int i = 2; i < 6; i++) cout<<q[i]<<" ";
+  cout<<endl<<"  ";
+  for (int i = 6; i < 8; i++) cout<<q[i]<<" ";
+  cout<<" "<<endl<<endl;
+  return;
+}
+
+int main() {
+  q[0] = 1;
+  
+  while (c >= 0){
+    c++;
+    //printing and backtracking
+    if (c == 8){
+      print();
+      backtrack(c);
+    }else{
+      q[c] = 0;
+    }
+
+    //assigning values to q[c]
+    while (c >= 0){
+      q[c]++;
+      if (ok(a,  c) == true){
+        c++;
+      }else{
+        q[c]++;
+        if (q[c] == 9){
+          q[c] = 0;
+          backtrack(c);
+        }else{
+          if (ok(a, c)) break;
+        }
+        
+      }
+    }   
+  }
+  
+  return 0;
+}
