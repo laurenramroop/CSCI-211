@@ -1,0 +1,66 @@
+//Designed to organize "sports teams" represented by characters in a string
+//From user input, determine the number of "teams", and determine the largest "teams".
+
+
+#include <iostream>
+#include <cstring>
+#include <algorithm>
+using namespace std;
+
+//array name for teams, what user inputs, and for scores of each team member + team scores
+string teamlist = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+string userinput; //ZZAZAA
+double scores[] = {};
+double teamscore[26] = {};
+
+string alphabetical;
+int membernumber = 1;
+
+int main() {
+  cout<< "Enter the same number of different uppercase letters: ";
+  while (true){
+    cin>> userinput;
+    for (int i = 0; i < userinput.length(); i++){
+      if (userinput[i] < 64 || userinput[i] > 91){
+      cout<<"Invalid input, try again: ";
+      cin>>userinput;
+      }
+    }
+    //if not the same number of teammates, say "invalid input"
+  }
+
+  //count number of teams and members on each team 
+  int teamnumber = 1;
+  alphabetical = userinput;
+  sort(alphabetical.begin(), alphabetical.end()); //AAAZZZ
+  for (int i = 0; i < alphabetical.size(); ++i){
+    if (scores[userinput[i]] == 0) ++teamnumber;
+    scores[userinput[i]] = scores[userinput[i]] + (1 + i); //calculate individual score
+    while (alphabetical[i] == alphabetical[i+1]){
+      membernumber++;
+    } 
+  }
+
+  //calculate score + add same letter ones
+  for (int c = 0; c < teamlist.size(); c++){
+    for (int i = 0; i < userinput.size(); i++){
+      scores[userinput[i]] = (i + 1) / membernumber; 
+      if (userinput[i] == teamlist[c]){
+        teamscore[c] = (scores[i] / membernumber) + teamscore[c];
+      }
+    }
+  }
+  double winner;
+  for (int i = 0; i < userinput.size(); i++){
+    if (teamscore[i] < teamscore[i+1]){
+      winner = teamscore[i];
+    }else {
+      winner = teamscore [i+1];
+    }
+  }
+
+  cout<<"The number of teams is: "<< teamnumber <<endl;
+  cout<<"The number of runners on each team is: "<<membernumber<<endl;
+  //cout<<"The winning team is "<<
+  return 0;
+}
