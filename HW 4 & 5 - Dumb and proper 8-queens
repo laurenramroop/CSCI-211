@@ -1,0 +1,117 @@
+//Designed to demonstrate an inefficient and proper solution to the 8 queens problem,
+//Where I designed a program to determine where 8 queens can be placed on 
+//a chess board without any of them capturing one another. 
+
+#include <iostream>
+#include <cmath>
+using naemspace std;
+
+void HW4(){
+  int b[8][8]={0}, r, c = 0;
+  b[0][0] = 1;
+  NC: c++;
+      if (c == 8) goto print;
+      r = -1; 
+
+    NR: r++;
+        if (r == 8) goto backtrack;
+
+        //row test
+        for (int i = 0; i < c; i++){
+          if (b[r][i] == 1) goto NR;
+        }
+
+        //up diagonal test
+        for (int i = 0; (r - i) > -1 && (c - 1) > -1; i++){
+          if (b[r-i][c-i] == 1) goto NR;
+        }
+
+        //down diagonal test
+        for (int i = 0; (r + i) < 8 && (c - i) > -1; i++){
+          if (b[r + i][c - i] == 1) goto NR;
+        }
+        b[r][c] = 1;
+        goto NC;
+
+  backtrack: c--;
+             if ( c == -1) return; 
+             r = 0; 
+             while (b[r][c] != 1) r++;
+             b[r][c] = 0;
+             goto NR;
+
+  print: for (int i = 0; i < 8; i++){
+           for (int j = 0; j < 8; j++){
+             cout<<b[i][j]<<" ";
+           }
+           cout<<endl;
+           if (i == 7) cout<<endl;
+         }
+        goto backtrack;
+
+  return;
+}
+
+//row and diagonal test
+bool ok(int q[]){
+  for (int i = 0; i <= 7; i++){
+    for (int j = 0; j <= 7; j++){
+      if (i != j){
+        if (q[j] == q[i] || (j - i) == abs(q[j] - q[i])){
+          return false;
+        }
+      }
+    }
+  }
+  return true; 
+}
+
+//prints out function
+void print(int q[]){  
+  for (int i = 0; i < 8; i++){
+    for (int j = 0; j < 8; j++){
+      if (q[i] != j ){
+        cout<<"0"<<" ";
+      }else {
+        cout<<"1"<<" ";
+      }
+    }
+    cout<<endl;
+    if (i == 7) cout<<endl;
+  }
+  return;
+}
+
+void HW5(){
+  int q[8]; 
+  for (int i0 = 0; i0 < 8; i0++){
+    for (int i1 = 0; i1 < 8; i1++){
+      for (int i2 = 0; i2 < 8; i2++){
+        for (int i3 = 0; i3 < 8; i3++){
+          for (int i4 = 0; i4 < 8; i4++){
+            for (int i5 = 0; i5 < 8; i5++){
+              for (int i6 = 0; i6 < 8; i6++){
+                for (int i7 = 0; i7 < 8; i7++){
+                  q[0] = i0, q[1] = i1, q[2] = i2, q[3] = i3, q[4] = i4, q[5] = i5, q[6] = i6, q[7] = i7;
+                  if (ok(q)){ 
+                    print(q);
+                  }                  
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  return;
+}
+
+int main(){
+  cout<<"Homework 4 Proper code: "<<endl;
+  HW4();
+  cout<<"Homework 5 Dumb code: "<<endl;
+  HW5();
+  return 0;
+}
