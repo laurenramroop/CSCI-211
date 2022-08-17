@@ -1,0 +1,60 @@
+//This generalizes the 8 queens problem to n queens, using vectors 
+//To help determine the size of for loops 
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int n, c = 0, count;
+vector<int>q;
+
+void backtrack(int &c){
+  c--;
+  if (c == -1) c++;
+  return;
+}
+
+bool check(vector<int>q, int c ){
+  for (int i = 0; i < c; i++) {
+    if (q[i] == q[c] || c - i == abs(q[c] - q[i])) 
+    return false;
+  }
+  return true;
+}
+
+void print (vector<int>q){
+  cout<<"There are "<<count<< " solutions to the "<<n<<" queens problem.";
+  return;
+}
+
+void nqueens (int num){
+  while (c >= 0){ 
+    //columns
+    c++;
+    if (c == n){
+      print(q);
+      backtrack(c);
+    }else{
+      q[c] = -1;
+    }
+
+    //rows
+    while (c >= 0){
+      q[c]++;
+      if (q[c]==n){
+        backtrack(c);
+      }else{
+        if (check(q,c)) break;
+      }  
+    }
+  }
+  return;
+}
+
+int main(){
+  cout<<"Enter a whole number"<<endl;
+  cin>>n;
+  nqueens(n);
+
+  return 0;
+}
