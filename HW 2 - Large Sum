@@ -1,0 +1,51 @@
+//This program is designed to add extremely large numbers that normally 
+//overflow C++ by having the user input their number as a string
+//convert user input into multiple data types
+//manually add numbers digit by digit, then display number as a string
+
+
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+string x, y, temp, totalsum = "";
+char v, digitsum;
+int carry = 0;
+
+string add(string a, string b){
+  //finding if a is larger and if it is, swap a and b
+  if (a > b){
+    temp = a; 
+    a = b;
+    b = temp;
+  }
+  
+  for(int i = y.length(); i > 0; i--){
+    //convert char into int
+    digitsum = (a[i] - '0') + (b[i] - '0') + carry;
+   
+    //convert int into char, add carry and add to totalsum
+    v = digitsum;
+    if (digitsum < 10){
+      v = digitsum + 48;
+      totalsum = v + totalsum; 
+      carry = 0;
+    }else {
+      digitsum = digitsum % 10;
+      carry = 1; 
+      v = digitsum + 48;
+      totalsum = v + totalsum; 
+    }
+  }
+  return totalsum;
+}
+
+int main() {
+  cout<<"Enter a number (max 100 characters): ";
+  cin>> x;
+  if (x == "done") return 0;
+  cout<<"Now enter another number: ";
+  cin>> y;
+  cout<<"The sum is: " <<add(x,y);
+  return 0;
+}
