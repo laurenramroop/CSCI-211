@@ -1,0 +1,36 @@
+//This program is designed to solve the stable marriage problem using recursion
+
+#include <iostream>
+using namespace std;
+
+//recursive
+
+void stablemarriage(){
+  int mp[3][3] = { { 0 , 2 , 1 },
+                   { 0 , 2 , 1 },
+                   { 1 , 2 , 0 },
+                 };
+  int wp[3][3] = {{ 2 , 1 , 0 },
+                  { 0 , 1 , 2 },
+                  { 2 , 0 , 1 },
+                 };
+  bool ok(int x[], int c){
+    if (c == 0) return true;
+    for (int i = 0; i < c; i++){
+      if (x[i] == x[c]) return false;
+    }
+    for (int i = 0; i < c; i+++){
+      if ( mp[i][x[c]] < mp[i][x[i]] && wp[x[c]][i] < wp[x[c]][c])return false;
+  
+      if ( wp[x[i]][c] < wp[x[i]][i] && mp[c][x[i]] < mp[c][x[c]] )return false;
+    
+    }
+    return true;
+  }
+  void solve ();
+
+}
+int main() {
+  stablemarriage();
+  return 0;
+}
