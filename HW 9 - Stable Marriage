@@ -1,0 +1,67 @@
+//Partners are assigned given their row and column position
+//in each respective 2D array. This is designed to rearranged
+//married couples based on values assigned in each row and col
+//of array so they match. 
+
+#include <iostream>
+using namespace std;
+int mp[3][3] = 
+{0, 2, 1,
+ 0, 2, 1,
+ 1, 2, 0};
+int wp[3][3] = 
+{2, 1, 0,
+ 0, 1, 2,
+ 2, 0, 1};
+int q[3], col = 0; //q[i] = woman assigned to man i 
+
+void print(){
+  for (int i = 0; i < 3; i++){
+    cout<<q[i]<<" ";
+    if (i == 2) cout<<endl;
+   }
+  return;
+}
+
+void backtrack (int &col){
+  col--;
+  if (col == -1) return;
+}
+
+bool ok(int col){
+  if (col == 0) return true;
+  for (int i = 0; i < col; i++){
+    //if current man ranks new woman better and current woman ranks new man better
+    if (mp[i][q[i]] > mp[col][q[col]] && wp[q[col]][col] > wp[q[col]][i]) return false;
+    //if current woman wants to cheat with new man and new man wants to cheat with current woman
+    if (mp[col][q[col]] > mp[col][q[i]] && wp[q[i]][i] > wp[q[i]][col]) return false;
+  }
+  //if woman is paired with another man
+  for (int i = 0; i < col; i++) if (q[i] == q[col]) return false;
+
+  return true;
+}
+
+int main() {
+  while (col >= 0){
+    col++;
+    if (col == 3){
+      print();
+      backtrack(col);
+    }else{
+      q[col] = -1;
+    }
+
+    while (col >= 0){
+      q[col]++;
+      if (q[col] == 3){
+        backtrack(col);
+      }else {
+        if (ok(col)) break;
+      }
+    }
+    
+  }
+  return 0;
+}
+
