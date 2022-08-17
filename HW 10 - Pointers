@@ -1,0 +1,17 @@
+//Mini exercised designed to familiarize pointers and location of pointer addresses
+
+#include <iostream>
+using namespace std;
+
+int main(){
+  int b[3][2];
+  cout<<sizeof(b)<<endl; //3 row * 2 col * 4 bytes (32 bit machine) = 24 bytes
+  cout<<sizeof(b + 0)<<endl;//8, pointer for array occupies 8 bytes
+  cout<<sizeof(*(b+0))<<endl;//8, pointer of a pointer
+  cout<<"b is: "<<b<<endl;//address of b[0][0]
+  cout<<"b + 1 is: "<<b + 1<<endl;//address of b[0][1]
+  cout<<"&b is: "<<&b<<endl;//address of b[0][0]
+  cout<<"&b + 1 is: "<<&b + 1<<endl;//address of b[1][0]
+
+  return 0;
+}
