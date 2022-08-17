@@ -1,0 +1,21 @@
+//Designed to use basic operations to determine the 
+//last two digits that are odd in a perfect square
+
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main() {
+  int square, twodigits;
+
+  for (int c = 1; c > 0; c++){
+    square = c*c;
+    twodigits = square % 100;
+    if (((twodigits / 10) % 2 == 1) && ((twodigits % 10) % 2 == 1 && (sqrt(square) == c ))){
+      cout<<"The first perfect square whose last two digits are both odd is: "<< square;
+      break;
+    }
+  }
+
+  return 0;
+}
